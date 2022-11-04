@@ -4,7 +4,7 @@ import bar_color from "ansi-colors"
 import dotenv from "dotenv"
 dotenv.config(".env")
 import fs from "fs"
-const accounts = JSON.parse(fs.readFileSync("./accounts.json")).addresses
+const accounts = JSON.parse(fs.readFileSync("./accounts.json")).accounts
 const provider = new providers.WebSocketProvider(process.env.MAINNET_RPC_URL)
 let total_balance = 0
 const main = async () => {
@@ -15,13 +15,13 @@ const main = async () => {
       format:
         "Scanning Progress " +
         bar_color.green("{bar}") +
-        " {percentage}% || {value}/{total} accounts",
+        " {percentage}%",
     },
     cliProgress.Presets.shades_classic
   )
   bar.start(accounts.length)
   for (let account of accounts) {
-    let wallet = new Wallet(account.private_key, provider)
+    let wallet = new Wallet(account.pri, provider)
     let bal = utils.formatEther(await wallet.getBalance())
     if(bal > 0) res.push(`account${index} balance: ${bal} eth`)
     bar.update(index++)
