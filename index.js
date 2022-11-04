@@ -7,7 +7,7 @@ const provider = new providers.WebSocketProvider(process.env.MAINNET_RPC_URL)
 const authSigner = Wallet.createRandom()
 // const signer = new Wallet(process.env.PRIVATE_KEY)
 
-const accounts = JSON.parse(fs.readFileSync("./accounts.json")).addresses
+const accounts = JSON.parse(fs.readFileSync("./accounts.json")).accounts
 
 const main = async () => {
   const flashbot_provider = await FlashbotsBundleProvider.create(
@@ -18,21 +18,21 @@ const main = async () => {
   let tx_bundle = []
   console.log("📦 packing...")
   console.time("packed!")
-  for (let i = 0; i < 25; i++) {
+  for (let i = 60; i < 110; i++) {
     let account = accounts[i]
-    let signer = new Wallet(account.private_key, provider)
+    let signer = new Wallet(account.pri, provider)
     let tx = {
       transaction: {
         chainId: 1,
         // chainId: 5,
         type: 2,
         value: 0,
-        data: "0xa0712d680000000000000000000000000000000000000000000000000000000000000002",
-        gasLimit: 140000,
-        maxFeePerGas: ethers.utils.parseUnits("200", "gwei"),
+        data: "0x9ff054df000000000000000000000000000000000000000000000000000000000000003c",
+        gasLimit: 180000,
+        maxFeePerGas: ethers.utils.parseUnits("16", "gwei"),
         // maxFeePerGas: ethers.BigNumber.from(10).pow(9).mul(30),
-        maxPriorityFeePerGas: ethers.utils.parseUnits("87", "gwei"),
-        to: "0x745735600DCf9562060BEcDAE9A1a0AFfFcd9Cf6",
+        maxPriorityFeePerGas: ethers.utils.parseUnits("1.5", "gwei"),
+        to: "0x06450dee7fd2fb8e39061434babcfc05599a6fb8",
         nonce: await signer.getTransactionCount(),
       },
       signer,
