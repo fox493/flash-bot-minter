@@ -37,14 +37,17 @@ MAINNET_RPC_URL=''RPC URL，自行注册一个infura的，记得要用websockets
 ├── format.js
 ├── index.js
 ├── package.json
+├── .env
 ├── utils
 │   ├── calBalance.js
 │   ├── generateWallets.js
 │   └── transferToWallet_v2.js
 └── yarn.lock
 ```
+**注意妥善保存助记词，不要泄漏`accounts.json`和`.env`中的任何内容！！**
 
 ## 脚本使用
+首先需要电脑的node环境，自行google或百度进行配置
 
 ```shell
 node utils/generateWallets    生成n个钱包+助记词
