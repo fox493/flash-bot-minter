@@ -22,7 +22,7 @@ index.js
 
 ```
 PRIVATE_KEY="你的主钱包私钥（用来分钱）"
-MAINNET_RPC_URL=''RPC URL，自行注册一个infura的，记得要用websockets的"
+MAINNET_RPC_URL="RPC URL，自行注册一个infura的，记得要用websockets的"
 ```
 
 **配置完成后将文件名改为`.env `才可以生效！**
@@ -52,7 +52,7 @@ MAINNET_RPC_URL=''RPC URL，自行注册一个infura的，记得要用websockets
 ```shell
 node utils/generateWallets    生成n个钱包+助记词
 node utils/transferToWallet_v2     把钱分散到n个钱包
-node index     用批量钱包去mint XEN
+node index     用批量钱包去mint XE
 node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
 node utils/calBalance 检查所有钱包共计剩余多少ether
 
