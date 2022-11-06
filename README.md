@@ -50,13 +50,13 @@ MAINNET_RPC_URL=''RPC URL，自行注册一个infura的，记得要用websockets
 node utils/generateWallets    生成n个钱包+助记词
 node utils/transferToWallet_v2     把钱分散到n个钱包
 node index     用批量钱包去mint XEN
-node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到[CryptoCell](https://hub.cryptocell.guru/xen-monitor/home)工具监控自己的XEN数量
+node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
 node utils/calBalance 检查所有钱包共计剩余多少ether
 
 ```
-
+CryptoCell地址：https://hub.cryptocell.guru/xen-monitor/home
 ## Q&A
-
+```
 Q：如何判断交易成功了？
 A：脚本的原理是将大量交易打包后一起发送，那么每笔交易都有自己的一个 nonce 值（可以自己搜索一下），
 这个 nonce 是不能重复的，所以说交易成功后 flashbot 再次发送交易的话，会报错提示 nonce 已经存在，那么
@@ -64,3 +64,4 @@ A：脚本的原理是将大量交易打包后一起发送，那么每笔交易�
 
 Q: 一次最多多少笔交易？
 A：我个人测试后貌似最大 50 笔交易打包，所以如果 100 个账户的话，需要分两次完成（不会多花 gas 的）
+```
