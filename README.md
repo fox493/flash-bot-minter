@@ -1,15 +1,27 @@
+[中文](https://github.com/fox493/flash-bot-minter/blob/main/README_CN.md) / English
 # flash-bot-minter
 
 Use bulk accounts to mint NFT through the flash bot.
 
-## 脚本原理
+## Introduction
 
-脚本使用**flashbot**来打包发送交易，也就是说可以大量交易同时在同一个区块成交。flashbot 的原理是监听每一个区块的生成，每有一个区块被打包时都发送交易，一旦交易被接收，就可以停止发送了，同时还可以配置自己期望的 gas 费用，个人觉得在需要批量交易的场景下还是蛮好用的
-这套脚本自带的是批量去 mint XEN token，首先手动生成 100 个钱包地址和助记词（这 100 个地址是在同一套助记词下的，方便后续管理），然后再手动从主钱包将钱分散到 100 个地址，最后再用 100 个地址去 mint XEN
+This script was originally written for me to bulk mint XEN, but you can modify it to perform other bulk operations, such as bulk mint NFT, bulk token sending, and NFT collection. Additionally, here are a few benefits of using flashbot:
+
+1. No loss of gas fee if the transaction fails. If you participate in an NFT public sale and fail in a gas war, you won't lose gas.
+2. You can set a reasonable and acceptable gas price, start the script and wait for the transaction to be completed. When Ethereum gas drops to your set value, and a flashbot miner receives your transaction, your transaction can be completed.
+
+The disadvantages of using flashbot are:
+
+1. Transactions may not be accepted. Even if you give a high gas fee, in some cases, there is a certain probability that the transaction will still not be accepted. So, if you really want to succeed in participating in an NFT public sale, please do not use flashbot.
+2. Flashbot can only package a maximum of 50 transactions simultaneously (of course, this can be solved by starting multiple processes).
+
+## Script principle
+
+The script uses flashbot to package and send transactions, meaning that many transactions can be traded simultaneously and executed in the same block. The principle of flashbot is to listen to each generated block and send a transaction each time a block is packaged. Once the transaction is accepted, it can be stopped. You can also configure your expected gas fee. Personally, I think it is useful in scenarios where bulk transactions are required. The script is designed to batch mint XEN tokens. First, 100 wallet addresses and mnemonics are generated manually (these 100 addresses are under the same mnemonic for easy management). Then, the money is manually distributed from the main wallet to 100 addresses, and finally, 100 addresses are used to mint XEN.
 
 ## 脚本配置
 
-具体需要做的配置只有 3 个文件
+There are only 3 files that need to be configured:
 
 ```
 utils/transerToWallet_v2.js
@@ -17,19 +29,18 @@ index.js
 .env.example
 ```
 
-前两个已经在文件中给出详细注释如何配置
-最后一个文件详细如下
+The first two have detailed comments on how to configure them in the file. The last file is detailed as follows:
 
 ```
-PRIVATE_KEY="你的主钱包私钥（用来分钱）"
-MAINNET_RPC_URL="RPC URL，自行注册一个infura的，记得要用websockets的"
+PRIVATE_KEY="Your main wallet's private key (for money splitting)"
+MAINNET_RPC_URL="RPC URL, register an infura, remember to use websockets"
+ALCHEMY_KEY="If you want to use the NFT collection function, you need to use the alchemy SDK, register alchemy and obtain a key"
 ```
 
-**配置完成后将文件名改为`.env `才可以生效！**
+**After configuration, change the file name to .env to take effect!**
 
-## 目录结构
-
-最终的目录结构如下
+## Directory Structure
+The final directory structure is as follows:
 
 ```
 ├── README.md
@@ -42,29 +53,40 @@ MAINNET_RPC_URL="RPC URL，自行注册一个infura的，记得要用websockets�
 │   ├── calBalance.js
 │   ├── generateWallets.js
 │   └── transferToWallet_v2.js
+│   └── collectNFT.js
 └── yarn.lock
 ```
-**注意妥善保存助记词，不要泄漏`accounts.json`和`.env`中的任何内容！！**
 
-## 脚本使用
-首先需要电脑的node环境，自行google或百度进行配置
+**Be sure to keep your mnemonics confidential and not leak any content in accounts.json or .env!!**
+
+## Script Usage
+
+First, you need a node environment on your computer. Google or Baidu for self-configuration:
 
 ```shell
 node utils/generateWallets    生成n个钱包+助记词
 node utils/transferToWallet_v2     把钱分散到n个钱包
-node index     用批量钱包去mint XE
+node index     用批量钱包去mint XEN
 node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
 node utils/calBalance 检查所有钱包共计剩余多少ether
+node utils/collectNFT 将NFT归集到一个钱包内
 
 ```
-CryptoCell地址：https://hub.cryptocell.guru/xen-monitor/home
+
 ## Q&A
-```
-Q：如何判断交易成功了？
-A：脚本的原理是将大量交易打包后一起发送，那么每笔交易都有自己的一个 nonce 值（可以自己搜索一下），
-这个 nonce 是不能重复的，所以说交易成功后 flashbot 再次发送交易的话，会报错提示 nonce 已经存在，那么
-这时你就可以确定交易已经被接收，可以去 etherscan 确认了
 
-Q: 一次最多多少笔交易？
-A：我个人测试后貌似最大 50 笔交易打包，所以如果 100 个账户的话，需要分两次完成（不会多花 gas 的）
-```
+Q: How to determine if a transaction is successful?
+A: The principle of the script is to bundle a large number of transactions and send them together. Each transaction has its own nonce value (which can be searched by oneself). This nonce cannot be duplicated. Therefore, if flashbot tries to send the transaction again after it is successful, it will give an error message indicating that the nonce already exists. At this time, you can confirm that the transaction has been received and check it on etherscan.
+
+Q: What is the maximum number of transactions per batch?
+A: Based on my personal testing, it seems that up to 50 transactions can be bundled together. Therefore, if there are 100 accounts, two batches are required to complete the transactions (without spending extra gas).
+
+
+## Case
+
+1. Recently, I participated in an NFT public sale using flashbot. This NFT was stealth launched, so I didn't know when it would start. My solution was to suspend the script in advance on the server using pm2 and continuously send mint transactions. Even if a failed transaction is rolled back, it will not waste gas.
+
+## Contact Information 
+
+wechat: foxof_eth
+twitter: @xof2021
