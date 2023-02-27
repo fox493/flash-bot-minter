@@ -18,7 +18,6 @@ const authSigner = Wallet.createRandom();
  *  FROM  从第几个账户开始
  *  TO    到第几个账户结束
  *  （记得要减1，也就是说比如从第1个到100个，那么就是FROM = 0， TO = 100）
- *  VALUE                  每个账户要转账的金额
  *  MAXFEEPERGAS           最大gas费
  *  MAXPRIFEE              最大矿工费（这里建议就用1.5）
  *  MAIN_WALLET            NFT归集地址
@@ -30,6 +29,7 @@ const FROM = 0;
 const TO = 10;
 const MAXFEEPERGAS = "20";
 const MAXPRIFEE = "1.5";
+const GASLIMIT = 60000
 const MAIN_WALLET = "0x5181E7418b1BeDfc176703741E1b8A887E65a525";
 const NFT_CONTRACT_ADDRESS = "0x21117713a4eC1a3e06d6d260149C90Ba9c593FD9";
 
@@ -118,7 +118,7 @@ const main = async () => {
           chainId: 1,
           type: 2,
           value: 0,
-          gasLimit: 140000,
+          gasLimit: GASLIMIT,
           data,
           maxFeePerGas: ethers.utils.parseUnits(MAXFEEPERGAS, "gwei"),
           maxPriorityFeePerGas: ethers.utils.parseUnits(MAXPRIFEE, "gwei"),
