@@ -62,12 +62,12 @@ ALCHEMY_KEY="如果要使用归集nft的功能，需要用到alchemy sdk，请�
 首先需要电脑的node环境，自行google或百度进行配置
 
 ```shell
-node utils/generateWallets    生成n个钱包+助记词
-node utils/transferToWallet_v2     把钱分散到n个钱包
-node index     用批量钱包去mint XEN
-node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
-node utils/calBalance 检查所有钱包共计剩余多少ether
-node utils/collectNFT 将NFT归集到一个钱包内
+node utils/generateWallets          👛生成n个钱包+助记词
+node utils/transferToWallet_v2      💲把钱分散到n个钱包
+node index                          🚀用批量钱包去mint XEN
+node format 	                      📦整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
+node utils/calBalance               💰检查所有钱包共计剩余多少ether
+node utils/collectNFT               🧶将NFT归集到一个钱包内
 
 ```
 CryptoCell地址：https://hub.cryptocell.guru/xen-monitor/home

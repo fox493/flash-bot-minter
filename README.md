@@ -64,12 +64,12 @@ The final directory structure is as follows:
 First, you need a node environment on your computer. Google or Baidu for self-configuration:
 
 ```shell
-node utils/generateWallets    生成n个钱包+助记词
-node utils/transferToWallet_v2     把钱分散到n个钱包
-node index     用批量钱包去mint XEN
-node format 	整理钱包地址，生成一个txt文件，复制后可以直接粘贴到CryptoCell工具监控自己的XEN数量
-node utils/calBalance 检查所有钱包共计剩余多少ether
-node utils/collectNFT 将NFT归集到一个钱包内
+node utils/generateWallets        👛Generate n wallets and their mnemonic phrases.
+node utils/transferToWallet_v2    💲Disperse funds to n wallets.
+node index                        🚀Use the batch wallets to mint XEN.
+node format                       📦Organize wallet addresses and generate a txt file, which can be directly copied and pasted into CryptoCell to monitor the amount of XEN owned.
+node utils/calBalance             💰Check how much ether is left in all wallets.
+node utils/collectNFT             🧶Collect NFTs into a single wallet.
 
 ```
 
