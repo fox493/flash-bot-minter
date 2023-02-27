@@ -19,7 +19,7 @@ The disadvantages of using flashbot are:
 
 The script uses flashbot to package and send transactions, meaning that many transactions can be traded simultaneously and executed in the same block. The principle of flashbot is to listen to each generated block and send a transaction each time a block is packaged. Once the transaction is accepted, it can be stopped. You can also configure your expected gas fee. Personally, I think it is useful in scenarios where bulk transactions are required. The script is designed to batch mint XEN tokens. First, 100 wallet addresses and mnemonics are generated manually (these 100 addresses are under the same mnemonic for easy management). Then, the money is manually distributed from the main wallet to 100 addresses, and finally, 100 addresses are used to mint XEN.
 
-## 脚本配置
+## Configuration
 
 There are only 3 files that need to be configured:
 
