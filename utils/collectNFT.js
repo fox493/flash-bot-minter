@@ -43,8 +43,7 @@ const alchemy = new Alchemy({
 const main = async () => {
   const flashbot_provider = await FlashbotsBundleProvider.create(
     provider,
-    authSigner,
-    "https://relay-goerli.flashbots.net"
+    authSigner
   );
   let tx_bundle = [];
   let nft_counter = 0;
@@ -116,7 +115,7 @@ const main = async () => {
       ]);
       let tx = {
         transaction: {
-          chainId: 5,
+          chainId: 1,
           type: 2,
           value: 0,
           gasLimit: 140000,
